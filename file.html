@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Online Expense Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>💰 Online Expense Tracker</h1>
+
+<!-- 1. Summary + salary settings -->
+<div class="box">
+  <h2>This Month's Summary</h2>
+  <p id="cycleInfo" class="empty"></p>
+  <div class="cards">
+    <div class="card" style="background:#2e8b57">Salary Credited<b id="sIncome">₹0</b></div>
+    <div class="card" style="background:#d9534f">Expense<b id="sExpense">₹0</b></div>
+    <div class="card" style="background:#b7950b">Invested (MF)<b id="sInvest">₹0</b></div>
+    <div class="card" style="background:#2874a6">Balance Left<b id="sBalance">₹0</b></div>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+  <p id="msg" class="empty"></p>
+
+  <h3>Salary Settings</h3>
+  <label>Monthly Salary (₹):</label>
+  <input type="number" id="incomeInput" min="1">
+  <label>Salary Credit / Bill Date (day of month, 1-28):</label>
+  <input type="number" id="dayInput" min="1" max="28">
+  <button class="blue" id="saveSetBtn">Save Settings</button>
+  <button class="blue" id="themeBtn">🌙 Dark / Light</button>
+</div>
+
+<!-- 5. Pie chart -->
+<div class="box">
+  <h2>Salary Pie Chart</h2>
+  <div id="pieTip">Hover or tap a slice</div>
+  <svg id="pieSvg" viewBox="0 0 200 200"></svg>
+  <div class="legend" id="pieLegend"></div>
+</div>
+
+<!-- 3D Chart -->
+<div class="box">
+  <h2>3D Expense Chart</h2>
+  <div id="tip">Hover or tap a bar</div>
+  <div id="stage"><div id="scene"></div></div>
+  <div class="controls">
+    <label>Rotate chart:</label>
+    <input type="range" id="rotate" min="-80" max="80" value="-25">
+    <br>
+    <button id="spinBtn">▶ Auto Spin</button>
+  </div>
+  <div class="legend" id="legend"></div>
+</div>
+
+<!-- 3 + 4. Savings and Mutual Fund -->
+<div class="box">
+  <h2>Savings &amp; Mutual Fund</h2>
+  <div class="cards">
+    <div class="card" style="background:#00838f">Money Left (Saving)<b id="vLeft">₹0</b></div>
+    <div class="card" style="background:#b7950b">Invested This Month<b id="vInv">₹0</b></div>
+    <div class="card" style="background:#6c3483">Total Invested<b id="vTotInv">₹0</b></div>
+    <div class="card" style="background:#34495e">Saving Rate<b id="vRate">0%</b></div>
+  </div>
+
+  <h3>Invest in Mutual Fund</h3>
+  <label>Fund Name:</label>
+  <input type="text" id="fundName" placeholder="e.g. Index Fund SIP">
+  <label>Amount to invest (deducted from balance):</label>
+  <input type="number" id="fundAmt" min="1" placeholder="Enter amount">
+  <button id="fundBtn">Invest &amp; Deduct</button>
+
+  <div class="tablewrap" style="margin-top:15px">
+    <table>
+      <thead><tr><th>Date</th><th>Fund</th><th>Amount</th><th>Delete</th></tr></thead>
+      <tbody id="fundBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Add Expense -->
+<div class="box">
+  <h2>Add New Expense</h2>
+  <form id="form">
+    <label>Expense Name:</label>
+    <input type="text" id="name" placeholder="Enter expense name" required>
+    <label>Amount:</label>
+    <input type="number" id="amount" placeholder="Enter amount" min="1" required>
+    <label>Category:</label>
+    <select id="category"></select>
+    <label>Date:</label>
+    <input type="date" id="date" required>
+    <button type="submit">Add Expense</button>
+  </form>
+</div>
+
+<!-- Expense history -->
+<div class="box">
+  <h2>Expense History</h2>
+  <label>Filter by Category:</label>
+  <select id="filter"></select>
+  <label><input type="checkbox" id="showAll" style="width:auto"> Show all months (not only this month)</label>
+  <br>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Date</th><th>Expense</th><th>Category</th><th>Amount</th><th>Delete</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <button class="red" style="margin-top:15px" id="clearBtn">Clear All Data</button>
+</div>
+
+<!-- 2. Full year history -->
+<div class="box">
+  <h2>Full Year History</h2>
+  <label>Year:</label>
+  <select id="yearSel"></select>
+  <br><br>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Month</th><th>Income</th><th>Expense</th><th>Invested</th><th>Saving</th></tr></thead>
+      <tbody id="ybody"></tbody>
+      <tfoot id="yfoot"></tfoot>
+    </table>
+  </div>
+  <p class="empty">Saving = Income − Expense − Invested. Each month starts on your salary date.</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
