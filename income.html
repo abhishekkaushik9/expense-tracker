@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Expense Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <div id="homeView">
+  <!-- Purple top part -->
+  <div class="top">
+    <p class="month" id="monthName"></p>
+    <p class="small">Current Balance</p>
+    <h1 id="balance">₹0</h1>
+    <p class="pill" id="cycleInfo"></p>
+  </div>
+
+  <!-- White part -->
+  <div class="sheet">
+    <h3>Your Money</h3>
+    <div class="two">
+      <div class="mini">
+        <span class="ic blue">⬇</span>
+        <small>Income</small>
+        <b id="sIncome">₹0</b>
+      </div>
+      <div class="mini">
+        <span class="ic red">⬆</span>
+        <small>Expenses</small>
+        <b id="sExpense">₹0</b>
+      </div>
+    </div>
+
+    <h3>Transactions</h3>
+    <div id="list"></div>
+  </div>
+
+  </div>
+
+  <!-- Report page -->
+  <div id="reportView" style="display:none">
+    <div class="rtop">
+      <h2>Report</h2>
+      <div class="monthnav">
+        <button id="prevM">‹</button>
+        <span id="repMonth"></span>
+        <button id="nextM">›</button>
+      </div>
+    </div>
+    <div class="rbody">
+      <div class="switch">
+        <button type="button" id="repExp" class="on">Expenses</button>
+        <button type="button" id="repInc">Income</button>
+      </div>
+
+      <!-- Expenses tab -->
+      <div id="expPanel">
+        <h3>Expenses Report</h3>
+        <svg id="donut" viewBox="0 0 200 200"></svg>
+        <p id="donutTip" class="tip">Tap a slice</p>
+        <div class="between"><span class="muted">All Expenses</span><b id="repTotal">₹0</b></div>
+        <div id="catList"></div>
+      </div>
+
+      <!-- Income tab -->
+      <div id="incPanel" style="display:none">
+        <h3>Income Details</h3>
+        <div class="two">
+          <div class="mini"><small>Salary</small><b id="incSalary">₹0</b></div>
+        </div>
+        <div class="between"><span class="muted">Total Income</span><b id="incTotal">₹0</b></div>
+        <div id="incList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="nav">
+    <button class="navbtn on" id="homeBtn"><span>🏠</span>Home</button>
+    <button class="navbtn" id="repBtn"><span>📊</span>Report</button>
+    <button class="plus" id="addOpen">+</button>
+    <button class="navbtn" id="setOpen"><span>⚙️</span>Settings</button>
+  </div>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+</div>
+
+<!-- Add popup -->
+<div class="popup" id="addPop">
+  <div class="popbox">
+    <h2>Add Expense</h2>
+    <form id="form">
+      <label>Name:</label>
+      <input type="text" id="name" placeholder="e.g. Lunch" required>
+      <label>Amount (₹):</label>
+      <input type="number" id="amount" placeholder="Enter amount" min="1" required>
+      <label>Category:</label>
+      <select id="category"></select>
+      <label>Date:</label>
+      <input type="date" id="date" required>
+      <button type="submit" class="save">Save</button>
+      <button type="button" class="close" data-close="addPop">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<!-- Settings popup -->
+<div class="popup" id="setPop">
+  <div class="popbox">
+    <h2>Settings</h2>
+    <label>Monthly Salary (₹):</label>
+    <input type="number" id="incomeInput" min="1">
+    <label>Salary Credit Date (1-30):</label>
+    <input type="number" id="dayInput" min="1" max="30">
+    <button class="save" id="saveSetBtn">Save Settings</button>
+    <button class="grey" id="themeBtn">🌙 Dark / Light</button>
+    <button class="del" id="clearBtn">Clear All Data</button>
+    <button class="close" data-close="setPop">Close</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
